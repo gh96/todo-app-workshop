@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server'
-import { getAllTodos, createTodo } from '@/lib/db'
+import { getAllTodos, createTodo, getTagsForTodo, setTodoTags, getTagById } from '@/lib/db'
 import { createTodoSchema } from '@/lib/validation'
 import { parseSingaporeLocalIso } from '@/lib/timezone'
 
 export async function GET() {
   const todos = getAllTodos()
-  return NextResponse.json({ success: true, data: todos })
+  const todosWithTags = todos.map((todo) => ({
+    ...todo,
+    tags: getTagsForTodo(todo.id),
+  }))
+  return NextResponse.json({ success: true, data: todosWithTags })
 }
 
 export async function POST(request: Request) {
@@ -15,7 +19,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: parseResult.error.flatten().formErrors.join('; ') }, { status: 400 })
   }
 
-  const { title, due_date, priority, is_recurring, recurrence_pattern } = parseResult.data
+  const { title, due_date, priority, is_recurring, recurrence_pattern, reminder_minutes, tag_ids } = parseResult.data
   const dueDateIso = due_date ? parseSingaporeLocalIso(due_date).toISOString() : null
   const todo = createTodo({
     title,
@@ -23,6 +27,13 @@ export async function POST(request: Request) {
     priority,
     is_recurring: is_recurring ?? false,
     recurrence_pattern: is_recurring ? (recurrence_pattern ?? null) : null,
+    reminder_minutes: dueDateIso ? (reminder_minutes ?? null) : null,
+    last_notification_sent: null,
   })
-  return NextResponse.json({ success: true, data: todo }, { status: 201 })
+  if (tag_ids?.length) {
+    const validIds = tag_ids.filter((id) => getTagById(id))
+    setTodoTags(todo.id, validIds)
+  }
+  const tags = getTagsForTodo(todo.id)
+  return NextResponse.json({ success: true, data: { ...todo, tags } }, { status: 201 })
 }

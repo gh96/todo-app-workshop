@@ -183,23 +183,23 @@ This document provides a comprehensive checklist for evaluating the completeness
 ---
 
 ### ✅ Feature 06: Tag System
-**Status:** ⬜ Not Started | ⬜ In Progress | ⬜ Complete | ⬜ Verified
+**Status:** ⬜ Not Started | ⬜ In Progress | ✅ Complete | ⬜ Verified
 
 **Implementation Checklist:**
-- [ ] Database: `tags` and `todo_tags` tables
-- [ ] API endpoint: `GET /api/tags`
-- [ ] API endpoint: `POST /api/tags`
-- [ ] API endpoint: `PUT /api/tags/[id]`
-- [ ] API endpoint: `DELETE /api/tags/[id]`
-- [ ] API endpoint: `POST /api/todos/[id]/tags`
-- [ ] API endpoint: `DELETE /api/todos/[id]/tags`
-- [ ] "Manage Tags" modal
-- [ ] Tag creation form (name + color picker)
-- [ ] Tag list with edit/delete buttons
-- [ ] Tag selection in todo form (checkboxes)
-- [ ] Tag badges on todos (colored)
-- [ ] Click badge to filter by tag
-- [ ] Tag filter indicator with clear button
+- [x] Database: `tags` and `todo_tags` tables
+- [x] API endpoint: `GET /api/tags`
+- [x] API endpoint: `POST /api/tags`
+- [x] API endpoint: `PUT /api/tags/[id]`
+- [x] API endpoint: `DELETE /api/tags/[id]`
+- [x] API endpoint: `POST /api/todos/[id]/tags`
+- [x] API endpoint: `DELETE /api/todos/[id]/tags`
+- [x] "Manage Tags" modal
+- [x] Tag creation form (name + color picker)
+- [x] Tag list with edit/delete buttons
+- [x] Tag selection in todo form (checkboxes)
+- [x] Tag badges on todos (colored)
+- [x] Click badge to filter by tag
+- [x] Tag filter indicator with clear button
 
 **Testing:**
 - [ ] E2E test: Create tag
@@ -208,14 +208,14 @@ This document provides a comprehensive checklist for evaluating the completeness
 - [ ] E2E test: Assign multiple tags to todo
 - [ ] E2E test: Filter by tag
 - [ ] E2E test: Duplicate tag name validation
-- [ ] Unit test: Tag name validation
+- [x] Unit test: Tag name validation
 
 **Acceptance Criteria:**
 - [ ] Tags unique per user
-- [ ] Custom colors work
-- [ ] Editing tag updates all todos
-- [ ] Deleting tag removes from todos
-- [ ] Filter works correctly
+- [x] Custom colors work
+- [x] Editing tag updates all todos
+- [x] Deleting tag removes from todos
+- [x] Filter works correctly
 
 ---
 
@@ -257,21 +257,21 @@ This document provides a comprehensive checklist for evaluating the completeness
 ---
 
 ### ✅ Feature 08: Search & Filtering
-**Status:** ⬜ Not Started | ⬜ In Progress | ⬜ Complete | ⬜ Verified
+**Status:** ⬜ Not Started | ⬜ In Progress | ✅ Complete | ⬜ Verified
 
 **Implementation Checklist:**
-- [ ] Search input field at top of page
-- [ ] Real-time filtering (no submit button)
-- [ ] Case-insensitive search
-- [ ] Search matches todo titles
-- [ ] Search matches tag names (advanced mode)
-- [ ] Priority filter dropdown
-- [ ] Tag filter (click badge)
-- [ ] Combined filters (AND logic)
-- [ ] Filter summary/indicator
-- [ ] Clear all filters button
-- [ ] Empty state for no results
-- [ ] Debounced search (300ms)
+- [x] Search input field at top of page
+- [x] Real-time filtering (no submit button)
+- [x] Case-insensitive search
+- [x] Search matches todo titles
+- [x] Search matches tag names (advanced mode)
+- [x] Priority filter dropdown
+- [x] Tag filter (click badge)
+- [x] Combined filters (AND logic)
+- [x] Filter summary/indicator
+- [x] Clear all filters button
+- [x] Empty state for no results
+- [x] Debounced search (300ms)
 
 **Testing:**
 - [ ] E2E test: Search by title
@@ -283,11 +283,11 @@ This document provides a comprehensive checklist for evaluating the completeness
 - [ ] Performance test: Filter 1000 todos < 100ms
 
 **Acceptance Criteria:**
-- [ ] Search is case-insensitive
-- [ ] Includes tag names in search
-- [ ] Filters combine with AND
-- [ ] Real-time updates
-- [ ] Clear message for empty results
+- [x] Search is case-insensitive
+- [x] Includes tag names in search
+- [x] Filters combine with AND
+- [x] Real-time updates
+- [x] Clear message for empty results
 
 ---
 

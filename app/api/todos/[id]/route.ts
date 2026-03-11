@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getTodoById, updateTodo, deleteTodo, createTodo } from '@/lib/db'
+import { getTodoById, updateTodo, deleteTodo, createTodo, getTagsForTodo } from '@/lib/db'
 import { updateTodoSchema } from '@/lib/validation'
 import { parseSingaporeLocalIso } from '@/lib/timezone'
 import { calculateNextDueDate } from '@/lib/recurrence'
@@ -13,7 +13,8 @@ export async function GET(
   if (!todo) {
     return NextResponse.json({ success: false, error: 'Todo not found' }, { status: 404 })
   }
-  return NextResponse.json({ success: true, data: todo })
+  const tags = getTagsForTodo(id)
+  return NextResponse.json({ success: true, data: { ...todo, tags } })
 }
 
 export async function PUT(
@@ -32,13 +33,30 @@ export async function PUT(
     return NextResponse.json({ success: false, error: parseResult.error.flatten().formErrors.join('; ') }, { status: 400 })
   }
 
-  const payload = { ...parseResult.data }
+  const payload: Parameters<typeof updateTodo>[1] = { ...parseResult.data }
   if (payload.due_date) {
     payload.due_date = parseSingaporeLocalIso(payload.due_date).toISOString()
   }
 
+  const effectiveDueDate = payload.due_date !== undefined ? payload.due_date : existing.due_date
+  if (payload.reminder_minutes !== undefined && payload.reminder_minutes !== null && !effectiveDueDate) {
+    return NextResponse.json({ success: false, error: 'Reminder requires a due date' }, { status: 400 })
+  }
+
   if (payload.is_recurring === false) {
     payload.recurrence_pattern = null
+  }
+
+  if (payload.due_date === null) {
+    payload.reminder_minutes = null
+  }
+
+  const reminderConfigChanged =
+    (payload.due_date !== undefined && payload.due_date !== existing.due_date) ||
+    (payload.reminder_minutes !== undefined && payload.reminder_minutes !== existing.reminder_minutes)
+
+  if (reminderConfigChanged) {
+    payload.last_notification_sent = null
   }
 
   const shouldCreateNextInstance =
@@ -62,6 +80,8 @@ export async function PUT(
       priority: existing.priority,
       is_recurring: true,
       recurrence_pattern: existing.recurrence_pattern,
+      reminder_minutes: existing.reminder_minutes,
+      last_notification_sent: null,
     })
   }
 
