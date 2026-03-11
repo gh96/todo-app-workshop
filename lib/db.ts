@@ -38,6 +38,14 @@ CREATE TABLE IF NOT EXISTS todos (
 );
 CREATE INDEX IF NOT EXISTS todos_due_date_idx ON todos(due_date);
 CREATE INDEX IF NOT EXISTS todos_completed_idx ON todos(completed);
+
+CREATE TABLE IF NOT EXISTS holidays (
+  id TEXT PRIMARY KEY,
+  date TEXT NOT NULL,
+  name TEXT NOT NULL,
+  observed INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS holidays_date_idx ON holidays(date);
 `)
 
 // Migration for existing databases that predate recurring fields.
@@ -181,4 +189,48 @@ export function deleteTodo(id: string): boolean {
   const stmt = db.prepare(`DELETE FROM todos WHERE id = ?`)
   const result = stmt.run(id)
   return result.changes > 0
+}
+
+// ---------- Holidays ----------
+
+export interface Holiday {
+  id: string
+  date: string      // YYYY-MM-DD
+  name: string
+  observed: boolean
+}
+
+export function getAllHolidays(): Holiday[] {
+  const stmt = db.prepare(`SELECT * FROM holidays ORDER BY date ASC`)
+  const rows = stmt.all() as Array<Record<string, unknown>>
+  return rows.map((row) => ({
+    id: String(row.id),
+    date: String(row.date),
+    name: String(row.name),
+    observed: Boolean(row.observed),
+  }))
+}
+
+export function getHolidaysByMonth(year: number, month: number): Holiday[] {
+  const prefix = `${year}-${String(month).padStart(2, '0')}`
+  const stmt = db.prepare(`SELECT * FROM holidays WHERE date LIKE ? ORDER BY date ASC`)
+  const rows = stmt.all(`${prefix}%`) as Array<Record<string, unknown>>
+  return rows.map((row) => ({
+    id: String(row.id),
+    date: String(row.date),
+    name: String(row.name),
+    observed: Boolean(row.observed),
+  }))
+}
+
+export function insertHoliday(data: { id: string; date: string; name: string; observed?: boolean }): void {
+  const stmt = db.prepare(
+    `INSERT OR IGNORE INTO holidays (id, date, name, observed) VALUES (@id, @date, @name, @observed)`
+  )
+  stmt.run({
+    id: data.id,
+    date: data.date,
+    name: data.name,
+    observed: data.observed ? 1 : 0,
+  })
 }

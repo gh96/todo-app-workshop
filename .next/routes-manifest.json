@@ -50,10 +50,22 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/api/holidays",
+      "regex": "^/api/holidays(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/holidays(?:/)?$"
+    },
+    {
       "page": "/api/todos",
       "regex": "^/api/todos(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/todos(?:/)?$"
+    },
+    {
+      "page": "/calendar",
+      "regex": "^/calendar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/calendar(?:/)?$"
     }
   ],
   "dataRoutes": [],

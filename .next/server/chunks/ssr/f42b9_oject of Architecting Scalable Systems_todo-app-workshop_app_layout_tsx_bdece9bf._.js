@@ -1,0 +1,3 @@
+module.exports=[41994,a=>{"use strict";var b=a.i(41395);function c({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{children:a})})}a.s(["default",()=>c,"metadata",0,{title:"Todo App Workshop",description:"A feature-rich todo app with Singapore timezone support."}])}];
+
+//# sourceMappingURL=f42b9_oject%20of%20Architecting%20Scalable%20Systems_todo-app-workshop_app_layout_tsx_bdece9bf._.js.map

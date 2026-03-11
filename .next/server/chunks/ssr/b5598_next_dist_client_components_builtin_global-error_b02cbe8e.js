@@ -1,0 +1,3 @@
+module.exports=[86901,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(2410);a.n(d("[project]/Project of Architecting Scalable Systems/todo-app-workshop/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},16148,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(2410);a.n(d("[project]/Project of Architecting Scalable Systems/todo-app-workshop/node_modules/next/dist/client/components/builtin/global-error.js"))},18335,a=>{"use strict";a.i(86901);var b=a.i(16148);a.n(b)}];
+
+//# sourceMappingURL=b5598_next_dist_client_components_builtin_global-error_b02cbe8e.js.map

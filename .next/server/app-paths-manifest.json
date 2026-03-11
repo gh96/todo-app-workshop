@@ -1,7 +1,9 @@
 {
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/api/holidays/route": "app/api/holidays/route.js",
   "/api/todos/[id]/route": "app/api/todos/[id]/route.js",
   "/api/todos/route": "app/api/todos/route.js",
+  "/calendar/page": "app/calendar/page.js",
   "/page": "app/page.js"
 }

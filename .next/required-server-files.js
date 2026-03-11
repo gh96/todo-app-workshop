@@ -100,7 +100,7 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/Users/ongrh/Developer/ai-sdlc/todo-app-workshop",
+    "outputFileTracingRoot": "/Users/lim/Documents/NUS_Project",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -157,7 +157,7 @@ self.__SERVER_FILES_MANIFEST={
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 13,
+      "cpus": 7,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -293,12 +293,12 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
     "turbopack": {
-      "root": "/Users/ongrh/Developer/ai-sdlc/todo-app-workshop"
+      "root": "/Users/lim/Documents/NUS_Project"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "/Users/ongrh/Developer/ai-sdlc/todo-app-workshop",
-  "relativeAppDir": "",
+  "appDir": "/Users/lim/Documents/NUS_Project/Project of Architecting Scalable Systems/todo-app-workshop",
+  "relativeAppDir": "Project of Architecting Scalable Systems/todo-app-workshop",
   "files": [
     ".next/routes-manifest.json",
     ".next/server/pages-manifest.json",
